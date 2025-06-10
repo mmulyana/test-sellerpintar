@@ -1,11 +1,13 @@
 'use client'
-
-import { Card } from '@/shared/components/ui/card'
-import Image from 'next/image'
-import { AuthForm } from '../types'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { useLogin } from '../api/use-login'
-import { useRegister } from '../api/use-register'
+import { Loader } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { Button } from '@/shared/components/ui/button'
+import { Input } from '@/shared/components/ui/input'
+import { Card } from '@/shared/components/ui/card'
 import {
 	Form,
 	FormControl,
@@ -14,7 +16,6 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/shared/components/ui/form'
-import { Input } from '@/shared/components/ui/input'
 import {
 	Select,
 	SelectContent,
@@ -22,10 +23,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/shared/components/ui/select'
-import { Button } from '@/shared/components/ui/button'
-import { Loader } from 'lucide-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+
+import { useRegister } from '../api/use-register'
+import { useLogin } from '../api/use-login'
+import { AuthForm } from '../types'
 
 export default function FormLoginRegister({
 	variant,
