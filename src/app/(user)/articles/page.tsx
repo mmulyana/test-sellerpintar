@@ -1,5 +1,9 @@
+import Hero from '@/shared/components/common/hero'
+
 export default function Page() {
-  return (
-    <div>Articles</div>
-  )
+	return (
+		<>
+			<Hero />
+		</>
+	)
 }

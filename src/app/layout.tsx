@@ -1,16 +1,11 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Archivo } from 'next/font/google'
 import '../shared/styles/globals.css'
 import QueryWrapper from '@/shared/lib/query-wrapper'
 import ToasterWrapper from '@/shared/lib/toast-wrapper'
 
-const geistSans = Geist({
-	variable: '--font-geist-sans',
-	subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
+const archivoSans = Archivo({
+	variable: '--font-archivo',
 	subsets: ['latin'],
 })
 
@@ -26,9 +21,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
+			<body className={`${archivoSans.variable}  antialiased`}>
 				<QueryWrapper>
 					<ToasterWrapper>{children}</ToasterWrapper>
 				</QueryWrapper>

@@ -1,23 +1,18 @@
 'use client'
 
 import { useMutation } from '@tanstack/react-query'
+import { isAxiosError } from 'axios'
+import { toast } from 'sonner'
+
 import { apiAuth } from '@/shared/constant/urls'
-import { useRouter } from 'next/navigation'
 import http from '@/shared/lib/http'
-import Cookies from 'js-cookie'
 
 import { AuthForm, RegisterResponse } from '../types'
-import { AxiosResponse, isAxiosError } from 'axios'
-import { authToken } from '@/shared/constant'
-import { toast } from 'sonner'
 
 export const useRegister = () => {
 	return useMutation({
 		mutationFn: async (data: AuthForm) => {
-			return http.post<AxiosResponse<RegisterResponse>>(
-				apiAuth + '/register',
-				data
-			)
+			return http.post<RegisterResponse>(apiAuth + '/register', data)
 		},
 		onSuccess: () => {
 			toast.success('Akun telah terdaftar')
