@@ -1,3 +1,5 @@
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 import { apiAuth } from '@/shared/constant/urls'
 import { keys } from '@/shared/constant/keys'

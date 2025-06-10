@@ -1,9 +1,10 @@
-import { Article } from '@/features/articles/types'
+import { Article } from '@/features/article/types'
 import { apiArticles } from '@/shared/constant/urls'
 import { formatDate } from '@/shared/utils'
 import Image from 'next/image'
 import parse from 'html-react-parser'
-import ArticleRelated from '@/features/articles/components/article-related'
+import ArticleRelated from '@/features/article/components/article-related'
+import { SafeHtmlRenderer } from '@/shared/components/common/safe-html-renderer'
 
 async function getArticle(id: string) {
 	const res = await fetch(`${apiArticles}/${id}`, {
@@ -42,8 +43,8 @@ export default async function DetailPage({
 				alt='image'
 				className='rounded-xl mb-10'
 			/>
-			<div className='prose mx-auto max-w-[642px] mb-10'>
-				{parse(article.content)}
+			<div className='mb-10'>
+				<SafeHtmlRenderer htmlContent={article.content} />
 			</div>
 			<ArticleRelated id={article.categoryId} />
 		</div>

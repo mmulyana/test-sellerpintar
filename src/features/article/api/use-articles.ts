@@ -17,7 +17,7 @@ export const useArticles = (params: {
 	category?: string
 }) => {
 	return useQuery({
-		queryKey: [keys.profile, params],
+		queryKey: [keys.articles, params],
 		queryFn: async () => {
 			const { data } = await http<IApi<Article[]>>(apiArticles, {
 				params,

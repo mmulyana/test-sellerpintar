@@ -15,6 +15,9 @@ import { Separator } from '../ui/separator'
 import { LogOut } from 'lucide-react'
 import Link from 'next/link'
 import useScroll from '@/shared/hooks/use-scroll'
+import { authToken } from '@/shared/constant'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 export default function Header({
 	mode = 'default',
@@ -27,7 +30,7 @@ export default function Header({
 	return (
 		<div
 			className={cn(
-				'fixed top-0 h-24 left-0 w-full px-[21px] md:px-[60px] py-5 flex justify-between items-center z-10 transition-colors duration-150',
+				'fixed top-0 h-16 md:h-24 left-0 w-full px-[21px] md:px-[60px] py-5 flex justify-between items-center z-10 transition-colors duration-150',
 				(isMobile || mode === 'light' || isScroll) && 'bg-white border-b'
 			)}
 		>
@@ -58,6 +61,15 @@ function UserButton({
 	isScroll: boolean
 }) {
 	const { data } = useProfile()
+	const router = useRouter()
+
+	const onLogout = () => {
+		Cookies.remove(authToken)
+		router.replace('/login')
+	}
+
+	const isAdmin = data?.role === 'Admin'
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -78,11 +90,30 @@ function UserButton({
 					)}
 				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
-				<DropdownMenuItem>My Account</DropdownMenuItem>
+			<DropdownMenuContent align='end' className='w-[224px] p-0'>
+				<DropdownMenuItem
+					className='py-[11px] px-[13px2]'
+					onClick={() => router.push('/profile')}
+				>
+					My Account
+				</DropdownMenuItem>
 				<Separator />
-				<DropdownMenuItem className='text-red-600'>
-					<LogOut />
+				{isAdmin && (
+					<>
+						<DropdownMenuItem
+							className='py-[11px] px-[13px]'
+							onClick={() => router.push('/dashboard')}
+						>
+							Open Dashboard
+						</DropdownMenuItem>
+						<Separator />
+					</>
+				)}
+				<DropdownMenuItem
+					className='text-red-600 py-[11px] px-[13px]'
+					onClick={onLogout}
+				>
+					<LogOut className='text-red-600' />
 					Logout
 				</DropdownMenuItem>
 			</DropdownMenuContent>
