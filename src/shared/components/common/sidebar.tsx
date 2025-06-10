@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Sidebar() {
 	return (
-		<div className='bg-blue-600 h-screen w-[267px] pt-6'>
+		<div className='bg-blue-600 min-h-screen w-[267px] pt-6'>
 			<div className='px-4'>
 				<Image
 					src='/assets/logo-white.svg'

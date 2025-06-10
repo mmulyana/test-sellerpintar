@@ -18,11 +18,7 @@ import {
 } from 'nuqs'
 import { useMemo } from 'react'
 
-export default function Page({
-	searchParams,
-}: {
-	searchParams: Promise<SearchParams>
-}) {
+export default function Page() {
 	const [query, setQuery] = useQueryStates({
 		page: parseAsInteger.withDefault(1),
 		search: parseAsString.withDefault(''),
@@ -72,7 +68,7 @@ export default function Page({
 						data?.data?.map((i) => <CardArticle data={i} key={i.id} />)
 					)}
 				</div>
-				<Pagination totalData={data?.total || 0} limit={9} />
+				<Pagination total={data?.total || 0} limit={9} />
 			</div>
 		</>
 	)

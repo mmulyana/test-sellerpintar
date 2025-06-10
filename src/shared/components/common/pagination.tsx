@@ -3,17 +3,17 @@
 import React from 'react'
 import { useQueryStates, parseAsInteger } from 'nuqs'
 import { Button } from '../ui/button'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function Pagination({
-	totalData,
+	total,
 	limit,
 }: {
-	totalData: number
+	total: number
 	limit: number
 }) {
-	const totalPages = Math.ceil(totalData / limit)
+	const totalPages = Math.ceil(total / limit)
 
 	const [queryStates, setQueryStates] = useQueryStates({
 		page: parseAsInteger.withDefault(1),
@@ -32,14 +32,7 @@ export default function Pagination({
 	}
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				justifyContent: 'center',
-				marginTop: '30px',
-				gap: '4px',
-			}}
-		>
+		<div className='flex justify-center'>
 			<Button
 				variant='ghost'
 				onClick={() => handlePageChange(currentPage - 1)}

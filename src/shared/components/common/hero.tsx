@@ -1,17 +1,15 @@
 'use client'
 
+import { parseAsString, useQueryStates } from 'nuqs'
 import { useEffect, useState } from 'react'
-import { SelectValue } from '@radix-ui/react-select'
-import { Input } from '../ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select'
 import { Search } from 'lucide-react'
-import { parseAsString, useQueryState, useQueryStates } from 'nuqs'
-import { useCategories } from '@/features/category/api/use-categories'
+
+import { Input } from '../ui/input'
+import CategorySelect from '@/features/category/components/category-select'
 
 export default function Hero() {
 	const [query, setQuery] = useQueryStates({
 		search: parseAsString,
-		category: parseAsString,
 	})
 	const [search, setSearch] = useState(query.search || '')
 
@@ -25,8 +23,6 @@ export default function Hero() {
 		}
 	}, [search])
 
-	const { data } = useCategories({})
-
 	return (
 		<div className='relative flex h-fit w-full items-end bg-red-400 pb-16 md:h-[400px] md:pb-[80px]'>
 			<div className='relative z-[2] mx-auto flex w-[730px] max-w-full flex-col items-center text-white'>
@@ -36,24 +32,7 @@ export default function Hero() {
 				</p>
 				<p className='mb-10 text-2xl'>Your daily dose of design insights</p>
 				<div className='flex w-[608px] max-w-full flex-col gap-2 rounded-md bg-blue-500 p-2.5 md:flex-row'>
-					<Select
-						onValueChange={(val) => setQuery({ category: val })}
-						value={query.category || ''}
-						defaultValue={query.category || ''}
-					>
-						<SelectTrigger className='!h-10 w-full rounded-[6px] bg-white md:w-[180px] text-foreground'>
-							<SelectValue placeholder='Select category' />
-						</SelectTrigger>
-						<SelectContent>
-							{data?.data
-								?.filter((i) => i.id)
-								.map((i, index) => (
-									<SelectItem key={i.id} value={i.id}>
-										{i.name}
-									</SelectItem>
-								))}
-						</SelectContent>
-					</Select>
+					<CategorySelect />
 					<div className='relative w-full'>
 						<Search
 							size={16}
