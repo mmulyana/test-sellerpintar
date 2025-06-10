@@ -14,6 +14,7 @@ export const useArticles = (params: {
 	limit?: number
 	title?: string
 	articleId?: string
+	category?: string
 }) => {
 	return useQuery({
 		queryKey: [keys.profile, params],

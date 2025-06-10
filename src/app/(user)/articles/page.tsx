@@ -34,7 +34,7 @@ export default function Page({
 	return (
 		<>
 			<Hero />
-			<div className='px-5 md:px-[100px] py-10'>
+			<div className='px-5 md:px-[100px] pt-10'>
 				<TotalArticle limit={9} page={query.page} total={data?.total || 0} />
 				<div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-6 mb-14'>
 					{isLoading ? (

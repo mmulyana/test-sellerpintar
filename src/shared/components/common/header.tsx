@@ -13,39 +13,37 @@ import { useProfile } from '@/features/auth/api/use-profile'
 import { cn } from '@/shared/lib/utils'
 import { Separator } from '../ui/separator'
 import { LogOut } from 'lucide-react'
+import Link from 'next/link'
+import useScroll from '@/shared/hooks/use-scroll'
 
 export default function Header({
 	mode = 'default',
 }: {
 	mode?: 'default' | 'light'
 }) {
+	const isScroll = useScroll()
 	const isMobile = useIsMobile()
 
 	return (
 		<div
 			className={cn(
-				'fixed top-0 left-0 w-full px-[21px] md:px-[60px] py-5 md:py-9 flex justify-between items-center z-10',
-				isMobile && 'bg-white'
+				'fixed top-0 h-24 left-0 w-full px-[21px] md:px-[60px] py-5 flex justify-between items-center z-10 transition-colors duration-150',
+				(isMobile || mode === 'light' || isScroll) && 'bg-white border-b'
 			)}
 		>
-			{!isMobile ? (
-				<Image
-					src='/assets/logo-white.png'
-					alt='Logo'
-					width={134}
-					height={24}
-					priority
-				/>
+			{isMobile || mode === 'light' || isScroll ? (
+				<Link href='/articles'>
+					<Image src='/assets/logo.svg' alt='Logo' width={134} height={24} />
+				</Link>
 			) : (
 				<Image
-					src='/assets/logo.png'
+					src='/assets/logo-white.svg'
 					alt='Logo'
 					width={134}
 					height={24}
-					priority
 				/>
 			)}
-			<UserButton isMobile={isMobile} mode={mode} />
+			<UserButton isMobile={isMobile} mode={mode} isScroll={isScroll} />
 		</div>
 	)
 }
@@ -53,9 +51,11 @@ export default function Header({
 function UserButton({
 	isMobile,
 	mode,
+	isScroll,
 }: {
 	isMobile?: boolean
 	mode?: 'default' | 'light'
+	isScroll: boolean
 }) {
 	const { data } = useProfile()
 	return (
@@ -69,7 +69,8 @@ function UserButton({
 						<p
 							className={cn(
 								'underline text-base font-medium',
-								mode === 'default' ? 'text-white ' : 'text-slate-900'
+								mode === 'default' ? 'text-white ' : 'text-slate-900',
+								isScroll && 'text-slate-900'
 							)}
 						>
 							{data?.username}
