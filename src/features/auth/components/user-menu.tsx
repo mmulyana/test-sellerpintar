@@ -54,7 +54,7 @@ export default function UserMenu({ mode }: { mode?: 'default' | 'light' }) {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align='end' className='w-[224px] p-0'>
 				<DropdownMenuItem
-					className='py-[11px] px-[13px2]'
+					className='py-[11px] px-[13px]'
 					onClick={() => router.push('/profile')}
 				>
 					My Account

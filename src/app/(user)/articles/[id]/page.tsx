@@ -36,13 +36,15 @@ export default async function DetailPage({
 			<p className='max-w-[642px] mx-auto text-center text-3xl text-slate-900 font-semibold mt-4 mb-10'>
 				{article.title}
 			</p>
-			<Image
-				src={article.imageUrl as string}
-				height={480}
-				width={1120}
-				alt='image'
-				className='rounded-xl mb-10'
-			/>
+			{article.imageUrl && (
+				<Image
+					src={article.imageUrl}
+					height={480}
+					width={1120}
+					alt='image'
+					className='rounded-xl mb-10'
+				/>
+			)}
 			<div className='mb-10'>
 				<SafeHtmlRenderer htmlContent={article.content} />
 			</div>

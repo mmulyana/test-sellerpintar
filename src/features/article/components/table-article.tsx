@@ -12,18 +12,21 @@ import { DataTable } from '@/shared/components/common/data-table'
 import { useArticles } from '../api/use-articles'
 import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs'
 import CategorySelect from '@/features/category/components/category-select'
+import { useMemo } from 'react'
+import { X } from 'lucide-react'
+import DestoryArticleConfirm from './destroy-article-confirm'
 
 const limit = 10
 
 export default function TableArticles() {
 	const [query, setQuery] = useQueryStates({
-		page: parseAsInteger.withDefault(1),
+		page: parseAsInteger,
 		search: parseAsString.withDefault(''),
 		category: parseAsString.withDefault(''),
 	})
 	const { data } = useArticles({
 		category: query.category,
-		page: query.page,
+		page: query.page || 1,
 		limit,
 		title: query.search,
 	})
@@ -81,13 +84,15 @@ export default function TableArticles() {
 					>
 						Edit
 					</Link>
-					<Button variant='link' className='text-destructive'>
-						Delete
-					</Button>
+					<DestoryArticleConfirm id={row.original.id} />
 				</div>
 			),
 		},
 	]
+
+	const hasValue = useMemo(() => {
+		return Object.values(query).some(Boolean)
+	}, [query])
 
 	return (
 		<DataTable
@@ -96,6 +101,23 @@ export default function TableArticles() {
 			limit={limit}
 			total={data?.total || 0}
 			title='Articles'
+			reset={
+				hasValue && (
+					<Button
+						variant='outline'
+						onClick={() => {
+							setQuery({
+								category: null,
+								page: null,
+								search: null,
+							})
+						}}
+					>
+						Reset
+						<X />
+					</Button>
+				)
+			}
 			filter={<CategorySelect />}
 			action={
 				<Link

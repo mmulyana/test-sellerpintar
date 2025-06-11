@@ -26,6 +26,7 @@ interface DataTableProps<TData, TValue> {
 	total: number
 	title?: string
 	filter?: React.ReactNode
+	reset?: React.ReactNode
 }
 
 export function DataTable<TData, TValue>({
@@ -37,6 +38,7 @@ export function DataTable<TData, TValue>({
 	total,
 	title,
 	filter,
+	reset
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable({
 		data,
@@ -99,6 +101,7 @@ export function DataTable<TData, TValue>({
 				<div className='flex gap-2 items-center'>
 					{filter}
 					<Search />
+					{reset}
 				</div>
 				{action}
 			</div>

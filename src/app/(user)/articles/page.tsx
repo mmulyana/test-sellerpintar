@@ -7,13 +7,10 @@ import Hero from '@/shared/components/common/hero'
 import Pagination from '@/shared/components/common/pagination'
 import { Button } from '@/shared/components/ui/button'
 import { Skeleton } from '@/shared/components/ui/skeleton'
-import { loadSearchParams } from '@/shared/utils/search-params'
 import { X } from 'lucide-react'
 import {
 	parseAsInteger,
 	parseAsString,
-	SearchParams,
-	useQueryState,
 	useQueryStates,
 } from 'nuqs'
 import { useMemo } from 'react'

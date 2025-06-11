@@ -9,7 +9,16 @@ export const formatDate = (date: string) => {
 	return format(parseDate, 'dd MMMM, yyyy', { locale: id })
 }
 
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+export const delay = <T extends any[]>(
+	ms: number,
+	callback: (...args: T) => void,
+	...args: T
+): void => {
+	setTimeout(() => {
+		callback(...args)
+	}, ms)
 }

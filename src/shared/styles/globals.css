@@ -121,3 +121,109 @@
 		@apply bg-gray-100 text-foreground;
 	}
 }
+
+.ProseMirror {
+	outline: none;
+	color: #2a2a2a;
+}
+
+.ProseMirror pre {
+	background: #282c34; /* One Dark Pro background for code blocks */
+	color: #abb2bf;
+	font-family: 'JetBrainsMono', 'SFMono-Regular', 'SF Mono', 'Consolas',
+		'Liberation Mono', 'Menlo', monospace;
+	padding: 0.75rem 1rem;
+	border-radius: 0.5rem;
+	overflow-x: auto;
+	line-height: 1.5;
+}
+
+.ProseMirror pre code {
+	color: inherit;
+	padding: 0;
+	background: none;
+	font-size: 0.9rem; /* Slightly larger font for readability */
+}
+
+.ProseMirror blockquote {
+	border-left: 4px solid #5c6370; /* One Dark Pro comment color for blockquote border */
+	padding-left: 1rem;
+	margin-left: 0;
+	font-style: italic;
+	color: #828a99; /* Slightly darker text for blockquotes */
+}
+
+.ProseMirror img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 0.5rem;
+	margin: 1rem 0;
+}
+
+.ProseMirror a {
+	color: #61afef; /* One Dark Pro blue for links */
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.ProseMirror a:hover {
+	color: #56b6c2; /* A slightly different shade for hover */
+}
+
+/* Code highlighting (One Dark Pro colors) */
+.hljs-keyword {
+	color: #c678dd;
+}
+
+.hljs-string {
+	color: #98c379;
+}
+
+.hljs-function {
+	color: #61afef; /* One Dark Pro blue for functions */
+}
+
+.hljs-number {
+	color: #d19a66;
+}
+
+.hljs-comment {
+	color: #5c6370;
+	font-style: italic;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute {
+	color: #e06c75; /* Red for variables/attributes */
+}
+
+.hljs-tag,
+.hljs-punctuation,
+.hljs-operator {
+	color: #abb2bf; /* Default text color for tags, punctuation, operators */
+}
+
+.hljs-property,
+.hljs-attr {
+	color: #d19a66; /* Orange for properties/attributes */
+}
+
+.hljs-built_in,
+.hljs-type {
+	color: #e6c07b; /* Yellow for built-ins/types */
+}
+
+.hljs-selector-tag,
+.hljs-selector-id,
+.hljs-selector-class {
+	color: #e06c75; /* Red for CSS selectors */
+}
+
+.hljs-meta {
+	color: #56b6c2; /* Cyan for meta information */
+}
+
+.hljs-regexp {
+	color: #50a14f; /* Green for regex */
+}

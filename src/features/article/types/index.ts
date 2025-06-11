@@ -20,3 +20,10 @@ export type Article = {
 		role: 'User' | 'Admin'
 	}
 }
+
+export type ArticleMutate = {
+	title: string
+	content: string
+	categoryId: string
+	imageUrl?: string
+}

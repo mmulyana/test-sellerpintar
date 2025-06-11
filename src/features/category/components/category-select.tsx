@@ -23,7 +23,7 @@ export default function CategorySelect() {
 			value={query.category || ''}
 			defaultValue={query.category || ''}
 		>
-			<SelectTrigger className='!h-10 w-full rounded-[6px] bg-white md:w-[180px] text-foreground'>
+			<SelectTrigger className='!h-10 w-full rounded-[6px] bg-white md:w-[180px] text-foreground border border-b shadow-none'>
 				<SelectValue placeholder='Select category' />
 			</SelectTrigger>
 			<SelectContent>
