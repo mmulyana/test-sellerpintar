@@ -1,6 +1,7 @@
 import Profile from '@/features/auth/components/profile'
 import Footer from '@/shared/components/common/footer'
 import Header from '@/shared/components/common/header'
+import { Suspense } from 'react'
 
 export default function Page() {
 	return (
@@ -9,7 +10,9 @@ export default function Page() {
 			<div className='min-h-screen pt-24 bg-white w-full flex justify-center items-center border'>
 				<Profile />
 			</div>
-			<Footer />
+			<Suspense>
+				<Footer />
+			</Suspense>
 		</>
 	)
 }
