@@ -39,6 +39,7 @@ import {
 	DialogTrigger,
 } from '@/shared/components/ui/dialog'
 import { Label } from '@/shared/components/ui/label'
+import { cn } from '@/shared/utils'
 
 const lowlight = createLowlight()
 lowlight.register('javascript', javascript)
@@ -51,9 +52,11 @@ lowlight.register('php', php)
 export default function TextEditor({
 	defaultValue,
 	onChange,
+	invalid,
 }: {
 	defaultValue?: string
 	onChange?: (val: string) => void
+	invalid?: boolean
 }) {
 	const [imageUrl, setImageUrl] = useState('')
 	const [linkUrl, setLinkUrl] = useState('')
@@ -85,7 +88,7 @@ export default function TextEditor({
 			}),
 			CharacterCount.configure(),
 		],
-		content: defaultValue ?? '<p>Type a content...</p>',
+		content: defaultValue ?? "Type a content...",
 		onUpdate: ({ editor }) => {
 			const html = editor.getHTML()
 			onChange?.(html)
@@ -138,13 +141,29 @@ export default function TextEditor({
 		}
 	}, [editor])
 
+	useEffect(() => {
+		if (
+			editor &&
+			defaultValue !== undefined &&
+			defaultValue !== null &&
+			editor.getHTML() !== defaultValue
+		) {
+			editor.commands.setContent(defaultValue, false)
+		}
+	}, [editor, defaultValue])
+
 	if (!editor) {
 		return null
 	}
 
 	return (
 		<div className='w-full'>
-			<div className='border border-border rounded-lg overflow-hidden '>
+			<div
+				className={cn(
+					'border border-border rounded-lg overflow-hidden',
+					invalid && 'border-red-600'
+				)}
+			>
 				{/* Toolbar */}
 				<div className='flex flex-wrap gap-4 p-4 items-center border-b borde-border bg-white'>
 					{/* Undo/Redo */}

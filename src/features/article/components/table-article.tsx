@@ -36,7 +36,7 @@ export default function TableArticles() {
 			id: 'Thumbnails',
 			header: () => <p className='text-center text-slate-900'>Thumbnails</p>,
 			cell: ({ row }) => (
-				<div className='px-20'>
+				<div className='flex justify-center'>
 					{row.original.imageUrl ? (
 						<Image
 							alt='thumbnail'
@@ -59,19 +59,26 @@ export default function TableArticles() {
 		},
 		{
 			header: 'Category',
-			cell: ({ row }) => row.original.category.name,
+			cell: ({ row }) => (
+				<p className='text-center text-slate-600'>
+					{row.original.category.name}
+				</p>
+			),
 		},
 		{
 			header: 'Created at',
-			cell: ({ row }) =>
-				format(new Date(row.original.createdAt), 'dd MMMM, yyyy HH:mm:ss', {
-					locale: id,
-				}),
+			cell: ({ row }) => (
+				<p className='text-center text-slate-600'>
+					{format(new Date(row.original.createdAt), 'dd MMMM, yyyy HH:mm:ss', {
+						locale: id,
+					})}
+				</p>
+			),
 		},
 		{
 			header: 'Action',
 			cell: ({ row }) => (
-				<div className='flex gap-2 items-center'>
+				<div className='flex gap-2 items-center justify-center'>
 					<Link
 						href={`/articles/${row.original.id}`}
 						className={buttonVariants({

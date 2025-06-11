@@ -1,3 +1,5 @@
+'use client'
+
 import { useCategories } from '@/features/category/api/use-categories'
 import { ImageUpload } from '@/shared/components/common/image-upload'
 import TextEditor from '@/shared/components/common/text-editor'
@@ -19,8 +21,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/shared/components/ui/select'
+import { cn } from '@/shared/utils'
 import Link from 'next/link'
 import { UseFormReturn } from 'react-hook-form'
+import PreviewArticle from './preview-article'
 
 export default function FormArticle({
 	form,
@@ -30,6 +34,7 @@ export default function FormArticle({
 	onSubmit: (data: any) => void
 }) {
 	const { data } = useCategories({})
+	const content = form.watch('content')
 
 	return (
 		<Form {...form}>
@@ -40,11 +45,15 @@ export default function FormArticle({
 				<FormField
 					control={form.control}
 					name='imageUrl'
-					render={({ field }) => (
+					render={({ field, fieldState }) => (
 						<FormItem>
 							<FormLabel>Thumbnails</FormLabel>
 							<FormControl>
-								<ImageUpload onChange={field.onChange} value={field.value} />
+								<ImageUpload
+									onChange={field.onChange}
+									value={field.value}
+									invalid={fieldState.error?.message?.includes('picture')}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -66,12 +75,17 @@ export default function FormArticle({
 				<FormField
 					control={form.control}
 					name='category'
-					render={({ field }) => (
+					render={({ field, fieldState }) => (
 						<FormItem className='w-full'>
 							<FormLabel>Title</FormLabel>
 							<FormControl>
 								<Select onValueChange={field.onChange} value={field.value}>
-									<SelectTrigger className='!h-10 w-full rounded-[6px] bg-white border-border shadow-none'>
+									<SelectTrigger
+										className={cn(
+											'!h-10 w-full rounded-[6px] bg-white border-border shadow-none',
+											fieldState.error && 'border-red-600'
+										)}
+									>
 										<SelectValue placeholder='Select category' />
 									</SelectTrigger>
 									<SelectContent>
@@ -87,7 +101,13 @@ export default function FormArticle({
 							</FormControl>
 							<FormDescription>
 								The existing category list can be seen in the{' '}
-								<Link href='/dashboard/articles'>category</Link> menu
+								<Link
+									className='underline text-blue-600'
+									href='/dashboard/categories'
+								>
+									category
+								</Link>{' '}
+								menu
 							</FormDescription>
 							<FormMessage />
 						</FormItem>
@@ -96,12 +116,13 @@ export default function FormArticle({
 				<FormField
 					control={form.control}
 					name='content'
-					render={({ field }) => (
+					render={({ field, fieldState }) => (
 						<FormItem>
 							<FormControl>
 								<TextEditor
 									onChange={field.onChange}
-									defaultValue={field.value}
+									defaultValue={content}
+									invalid={fieldState.error?.message?.includes('empty')}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -112,9 +133,10 @@ export default function FormArticle({
 					<Button variant='outline' type='button'>
 						Cancel
 					</Button>
-					<Button variant='secondary' type='button'>
-						Preview
-					</Button>
+					<PreviewArticle
+						content={form.watch('content')}
+						title={form.watch('title')}
+					/>
 					<Button>Upload</Button>
 				</div>
 			</form>

@@ -27,6 +27,9 @@ import {
 import { useRegister } from '../api/use-register'
 import { useLogin } from '../api/use-login'
 import { AuthForm } from '../types'
+import { AuthSchema } from '../schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { cn } from '@/shared/utils'
 
 export default function FormLoginRegister({
 	variant,
@@ -37,7 +40,11 @@ export default function FormLoginRegister({
 	const { mutate: login, isPending: isPendingLogin } = useLogin()
 	const { mutate: register, isPending: isPendingRegis } = useRegister()
 
+	const schema =
+		variant === 'login' ? AuthSchema.omit({ role: true }) : AuthSchema
+
 	const form = useForm<AuthForm>({
+		resolver: zodResolver(schema),
 		defaultValues: {
 			password: '',
 			role: '',
@@ -129,12 +136,17 @@ export default function FormLoginRegister({
 						<FormField
 							control={form.control}
 							name='role'
-							render={({ field }) => (
+							render={({ field, fieldState }) => (
 								<FormItem>
 									<FormLabel>Role</FormLabel>
 									<FormControl>
 										<Select value={field.value} onValueChange={field.onChange}>
-											<SelectTrigger className='w-full'>
+											<SelectTrigger
+												className={cn(
+													'w-full',
+													fieldState.error?.message?.includes('select') && 'border-red-600'
+												)}
+											>
 												<SelectValue placeholder='Select Role' />
 											</SelectTrigger>
 											<SelectContent>

@@ -9,10 +9,21 @@ import { useCreateArticle } from '@/features/article/api/use-create-article'
 import { useRouter } from 'next/navigation'
 import { delay } from '@/shared/utils'
 import { uploadImage } from '@/shared/api/upload-s3'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ArticleSchema } from '@/features/article/schema'
+import { ArticleForm } from '@/features/article/types'
 
 export default function Page() {
 	const router = useRouter()
-	const form = useForm()
+	const form = useForm<ArticleForm>({
+		resolver: zodResolver(ArticleSchema),
+		defaultValues: {
+			category: '',
+			content: '',
+			imageUrl: '',
+			title: '',
+		},
+	})
 	const { mutate } = useCreateArticle()
 
 	const onSubmit = async (data: any) => {

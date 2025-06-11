@@ -1,11 +1,11 @@
 'use client'
 
+import CategorySelect from '@/features/category/components/category-select'
 import { parseAsString, useQueryStates } from 'nuqs'
 import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
 
 import { Input } from '../ui/input'
-import CategorySelect from '@/features/category/components/category-select'
 
 export default function Hero() {
 	const [query, setQuery] = useQueryStates({
@@ -24,7 +24,7 @@ export default function Hero() {
 	}, [search])
 
 	return (
-		<div className='relative flex h-fit w-full items-end bg-red-400 pb-16 md:h-[400px] md:pb-[80px]'>
+		<div className='relative flex h-fit w-full items-end pb-4 md:h-[400px] md:pb-[80px] pt-24 px-4 md:px-0'>
 			<div className='relative z-[2] mx-auto flex w-[730px] max-w-full flex-col items-center text-white'>
 				<p className='mb-3 text-base font-bold'>Blog genzet</p>
 				<p className='mb-3 text-5xl font-medium'>

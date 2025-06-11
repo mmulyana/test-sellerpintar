@@ -61,7 +61,11 @@ export default function UserMenu({
 			<DropdownMenuContent align='end' className='w-[224px] p-0'>
 				<DropdownMenuItem
 					className='py-[11px] px-[13px]'
-					onClick={() => router.push('/profile')}
+					onClick={() => {
+						const path =
+							variant == 'dashboard' ? '/dashboard/profile' : '/profile'
+						router.push(path)
+					}}
 				>
 					My Account
 				</DropdownMenuItem>

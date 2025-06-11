@@ -12,12 +12,35 @@ import { uploadImage } from '@/shared/api/upload-s3'
 import { useArticle } from '@/features/article/api/use-article'
 import { useEffect } from 'react'
 import { usePutArticle } from '@/features/article/api/use-put-article'
+import { ArticleForm } from '@/features/article/types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ArticleSchema } from '@/features/article/schema'
+import { z } from 'zod'
+
+const updateArticleSchema = ArticleSchema.omit({
+	imageUrl: true,
+}).extend({
+	imageUrl: z.union([
+		z.string().url().or(z.literal('')),
+		z.instanceof(File).refine((file) => file.size > 0, {
+			message: 'Please enter picture',
+		}),
+	]),
+})
 
 export default function Page() {
 	const { id } = useParams()
 	const router = useRouter()
 
-	const form = useForm()
+	const form = useForm<any>({
+		resolver: zodResolver(updateArticleSchema),
+		defaultValues: {
+			category: '',
+			content: '',
+			imageUrl: '',
+			title: '',
+		},
+	})
 
 	const { data } = useArticle({ id: (id as string) || '' })
 	const { mutate } = usePutArticle()

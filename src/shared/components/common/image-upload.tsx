@@ -1,8 +1,7 @@
-import { Image, ImagePlus, X } from 'lucide-react'
+import { Image, ImagePlus } from 'lucide-react'
 import { useRef } from 'react'
 
 import { Button } from '@/shared/components/ui/button'
-import { baseUrl } from '@/shared/constant/urls'
 import { cn } from '@/shared/utils'
 
 interface ImageUploadProps {
@@ -10,6 +9,7 @@ interface ImageUploadProps {
 	onChange: (file: File | null) => void
 	maxSizeMb?: number
 	className?: string
+	invalid?: boolean
 }
 
 export const ImageUpload = ({
@@ -17,6 +17,7 @@ export const ImageUpload = ({
 	onChange,
 	maxSizeMb = 5,
 	className,
+	invalid,
 }: ImageUploadProps) => {
 	const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -44,6 +45,7 @@ export const ImageUpload = ({
 				className={cn(
 					'w-[223px] h-[163px] rounded-lg border border-dashed border-slate-300 flex items-center justify-center overflow-hidden bg-white relative',
 					value && 'p-3 border-double border-border flex-col',
+					invalid && 'border-red-600',
 					className
 				)}
 			>

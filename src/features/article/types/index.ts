@@ -1,3 +1,6 @@
+import { z } from 'zod'
+import { ArticleSchema } from '../schema'
+
 export type Article = {
 	id: string
 	title: string
@@ -27,3 +30,5 @@ export type ArticleMutate = {
 	categoryId: string
 	imageUrl?: string
 }
+
+export type ArticleForm = z.infer<typeof ArticleSchema>

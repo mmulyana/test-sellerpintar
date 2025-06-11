@@ -97,7 +97,7 @@ export function DataTable<TData, TValue>({
 					Total {title || 'data'} : {total}
 				</p>
 			</div>
-			<div className='px-6 py-[26px] flex justify-between items-center'>
+			<div className='px-6 py-[26px] flex justify-between items-center flex-col md:flex-row gap-4'>
 				<div className='flex gap-2 items-center'>
 					{filter}
 					<Search />

@@ -14,10 +14,17 @@ import { useForm } from 'react-hook-form'
 import { DialogClose } from '@radix-ui/react-dialog'
 import { useCreateCategory } from '../api/use-create-category'
 import { useState } from 'react'
-
+import { zodResolver } from '@hookform/resolvers/zod'
+import { CategorySchema } from '../schema'
+import { CategoryMutate } from '../types'
 export default function ModalAddCategory() {
 	const [open, setOpen] = useState(false)
-	const form = useForm()
+	const form = useForm<CategoryMutate>({
+		resolver: zodResolver(CategorySchema),
+		defaultValues: {
+			name: '',
+		},
+	})
 
 	const { mutate } = useCreateCategory()
 

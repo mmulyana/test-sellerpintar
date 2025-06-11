@@ -10,8 +10,10 @@ export default function Profile() {
 	return (
 		<div className='flex flex-col items-center justify-center'>
 			<p className='text-slate-900 font-semibold mb-9 text-xl'>User Profile</p>
-			<Avatar className='w-16 h-16 rounded-full bg-blue-200 text-blue-900 text-2xl uppercase font-semibold'>
-				<AvatarFallback>{data?.username.at(1)}</AvatarFallback>
+			<Avatar className='w-16 h-16 rounded-full text-blue-900 text-2xl uppercase font-semibold'>
+				<AvatarFallback className='bg-blue-200'>
+					{data?.username.at(1)}
+				</AvatarFallback>
 			</Avatar>
 			<div className='space-y-3 mt-6 w-[336px] max-w-full'>
 				<div className='grid grid-cols-[96px_1fr] bg-gray-100 px-3 py-2.5 rounded border border-slate-200'>

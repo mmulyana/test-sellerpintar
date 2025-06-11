@@ -1,10 +1,11 @@
 'use client'
 
-import React from 'react'
 import { useQueryStates, parseAsInteger } from 'nuqs'
-import { Button } from '../ui/button'
-import { cn } from '@/shared/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import React from 'react'
+import { cn } from '@/shared/utils'
+
+import { Button } from '../ui/button'
 
 export default function Pagination({
 	total,
@@ -32,7 +33,7 @@ export default function Pagination({
 	}
 
 	return (
-		<div className='flex justify-center'>
+		<div className='flex justify-center flex-wrap'>
 			<Button
 				variant='ghost'
 				onClick={() => handlePageChange(currentPage - 1)}
@@ -46,7 +47,7 @@ export default function Pagination({
 				Previous
 			</Button>
 
-			<ul className='flex gap-2'>
+			<ul className='flex gap-2 flex-wrap'>
 				{pageNumbers.map((number) => (
 					<li key={number}>
 						<Button
