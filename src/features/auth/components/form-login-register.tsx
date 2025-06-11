@@ -1,9 +1,10 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { Loader } from 'lucide-react'
+import { Loader, Eye, EyeOff } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
@@ -39,6 +40,7 @@ export default function FormLoginRegister({
 	const router = useRouter()
 	const { mutate: login, isPending: isPendingLogin } = useLogin()
 	const { mutate: register, isPending: isPendingRegis } = useRegister()
+	const [showPassword, setShowPassword] = useState(false)
 
 	const schema =
 		variant === 'login' ? AuthSchema.omit({ role: true }) : AuthSchema
@@ -126,7 +128,23 @@ export default function FormLoginRegister({
 							<FormItem>
 								<FormLabel>Password</FormLabel>
 								<FormControl>
-									<Input {...field} />
+									<div className='relative'>
+										<Input
+											{...field}
+											type={showPassword ? 'text' : 'password'}
+										/>
+										<button
+											type='button'
+											className='absolute inset-y-0 right-0 flex items-center pr-3'
+											onClick={() => setShowPassword((prev) => !prev)}
+										>
+											{showPassword ? (
+												<EyeOff className='h-4 w-4 text-slate-500' />
+											) : (
+												<Eye className='h-4 w-4 text-slate-500' />
+											)}
+										</button>
+									</div>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
