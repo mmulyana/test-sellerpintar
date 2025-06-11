@@ -4,6 +4,7 @@ import {
 	ColumnDef,
 	flexRender,
 	getCoreRowModel,
+	getFilteredRowModel,
 	useReactTable,
 } from '@tanstack/react-table'
 import {
@@ -15,8 +16,8 @@ import {
 	TableRow,
 } from '../ui/table'
 import { Skeleton } from '../ui/skeleton'
-import { cn } from '@/shared/utils'
 import Pagination from './pagination'
+import { parseAsString, useQueryState } from 'nuqs'
 import Search from './search'
 
 interface DataTableProps<TData, TValue> {
@@ -42,10 +43,17 @@ export function DataTable<TData, TValue>({
 	filter,
 	reset,
 }: DataTableProps<TData, TValue>) {
+	const [search] = useQueryState('search', parseAsString.withDefault(''))
+
 	const table = useReactTable({
 		data,
 		columns,
+		state: {
+			globalFilter: search,
+		},
+		globalFilterFn: 'includesString',
 		getCoreRowModel: getCoreRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
 	})
 
 	const renderTableBody = () => {
@@ -65,14 +73,14 @@ export function DataTable<TData, TValue>({
 			)
 		}
 		if (table.getRowModel().rows?.length) {
-			return table.getRowModel().rows.map((row, rowIndex) => (
+			return table.getRowModel().rows.map((row) => (
 				<TableRow
 					key={row.id}
 					data-state={row.getIsSelected() && 'selected'}
 					className='border-b'
 				>
 					{row.getVisibleCells().map((cell) => (
-						<TableCell key={cell.id} className={cn('text-slate-600 ')}>
+						<TableCell key={cell.id} className='text-slate-600'>
 							{flexRender(cell.column.columnDef.cell, cell.getContext())}
 						</TableCell>
 					))}
@@ -113,7 +121,7 @@ export function DataTable<TData, TValue>({
 				<TableHeader>
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow key={headerGroup.id} className='border-none'>
-							{headerGroup.headers.map((header, index) => (
+							{headerGroup.headers.map((header) => (
 								<TableHead
 									key={header.id}
 									className='bg-gray-100 border-y text-slate-900 font-medium border-border text-center'

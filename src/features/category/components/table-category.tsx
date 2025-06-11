@@ -26,16 +26,17 @@ export default function TableCategory() {
 	const { data } = useCategories({
 		page: query.page || 1,
 		limit,
-		search: query.search,
 	})
 
 	const column: ColumnDef<Category>[] = [
 		{
-			id: 'Thumbnails',
-			header: () => <p className='text-center text-slate-900'>Thumbnails</p>,
+			id: 'name',
+			header: 'Category',
 			cell: ({ row }) => (
 				<p className='text-center text-slate-600'>{row.original.name}</p>
 			),
+			accessorKey: 'name',
+			filterFn: 'includesString',
 		},
 		{
 			header: 'Created at',
