@@ -5,3 +5,7 @@ export type Category = {
 	updatedAt: string
 	userId: string
 }
+
+export type CategoryMutate = {
+	name: string
+}

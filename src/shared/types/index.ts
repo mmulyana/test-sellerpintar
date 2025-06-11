@@ -3,4 +3,8 @@ export interface IApi<T = void> {
 	total?: number
 	page?: number
 	limit?: number
+
+	totalData?: number
+	currentPage?: number
+	totalPages?: number
 }

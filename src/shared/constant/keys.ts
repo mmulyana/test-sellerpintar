@@ -3,4 +3,5 @@ export const keys = {
 	articles: 'articles',
 	articlesDetail: 'articles-detail',
 	categories: 'categories',
+	categoryDetail: 'category-detail',
 }

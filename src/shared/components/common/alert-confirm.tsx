@@ -37,9 +37,9 @@ export default function AlertConfirm({
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
 				<Button
-					variant='ghost'
+					variant='link'
 					className={cn(
-						'text-error hover:text-white hover:bg-error px-2.5',
+						'text-red-500 hover:text-red-600 px-0',
 						triggerClassName
 					)}
 					type='button'

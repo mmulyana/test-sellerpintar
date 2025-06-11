@@ -91,9 +91,9 @@ export function DataTable<TData, TValue>({
 	}
 
 	return (
-		<div className='bg-white border border-border rounded-xl'>
+		<div className='bg-[#F9FAFB] border border-border rounded-xl'>
 			<div className='border-b p-6'>
-				<p className='text-slate-800'>
+				<p className='text-slate-800 font-medium'>
 					Total {title || 'data'} : {total}
 				</p>
 			</div>

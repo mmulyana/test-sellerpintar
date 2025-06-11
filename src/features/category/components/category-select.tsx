@@ -15,7 +15,7 @@ export default function CategorySelect() {
 		category: parseAsString,
 	})
 
-	const { data } = useCategories({})
+	const { data } = useCategories({ limit: 100 })
 
 	return (
 		<Select

@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 
 import { apiArticles } from '@/shared/constant/urls'
 import { keys } from '@/shared/constant/keys'
-import { IApi } from '@/shared/types'
 import http from '@/shared/lib/http'
 
 import { Article } from '../types'

@@ -71,16 +71,22 @@ export default function TableArticles() {
 		{
 			header: 'Action',
 			cell: ({ row }) => (
-				<div className='flex gap-3 items-center'>
+				<div className='flex gap-2 items-center'>
 					<Link
 						href={`/articles/${row.original.id}`}
-						className='text-blue-600 underline'
+						className={buttonVariants({
+							variant: 'link',
+							className: '!text-blue-600 underline !p-0 w-fit',
+						})}
 					>
 						Preview
 					</Link>
 					<Link
 						href={`/dashboard/articles/${row.original.id}`}
-						className='text-blue-600 underline'
+						className={buttonVariants({
+							variant: 'link',
+							className: '!text-blue-600 underline !p-0 w-fit',
+						})}
 					>
 						Edit
 					</Link>

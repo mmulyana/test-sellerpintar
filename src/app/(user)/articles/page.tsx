@@ -8,23 +8,19 @@ import Pagination from '@/shared/components/common/pagination'
 import { Button } from '@/shared/components/ui/button'
 import { Skeleton } from '@/shared/components/ui/skeleton'
 import { X } from 'lucide-react'
-import {
-	parseAsInteger,
-	parseAsString,
-	useQueryStates,
-} from 'nuqs'
+import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs'
 import { useMemo } from 'react'
 
 export default function Page() {
 	const [query, setQuery] = useQueryStates({
-		page: parseAsInteger.withDefault(1),
+		page: parseAsInteger,
 		search: parseAsString.withDefault(''),
 		category: parseAsString.withDefault(''),
 	})
 
 	const { data, isLoading } = useArticles({
 		limit: 9,
-		page: query.page,
+		page: query.page || 1,
 		title: query.search,
 		category: query.category,
 	})
@@ -37,7 +33,11 @@ export default function Page() {
 			<Hero />
 			<div className='px-5 md:px-[100px] pt-10'>
 				<div className='flex justify-between items-center'>
-					<TotalArticle limit={9} page={query.page} total={data?.total || 0} />
+					<TotalArticle
+						limit={9}
+						page={query.page || 1}
+						total={data?.total || 0}
+					/>
 					{hasValue && (
 						<Button
 							variant='outline'

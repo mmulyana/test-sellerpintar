@@ -18,7 +18,13 @@ import {
 import { useIsMobile } from '@/shared/hooks/use-mobile'
 import { cn } from '@/shared/utils'
 
-export default function UserMenu({ mode }: { mode?: 'default' | 'light' }) {
+export default function UserMenu({
+	mode,
+	variant = 'user',
+}: {
+	mode?: 'default' | 'light'
+	variant?: 'dashboard' | 'user'
+}) {
 	const isScroll = useScroll()
 
 	const isMobile = useIsMobile()
@@ -60,17 +66,30 @@ export default function UserMenu({ mode }: { mode?: 'default' | 'light' }) {
 					My Account
 				</DropdownMenuItem>
 				<Separator />
-				{isAdmin && (
-					<>
-						<DropdownMenuItem
-							className='py-[11px] px-[13px]'
-							onClick={() => router.push('/dashboard')}
-						>
-							Open Dashboard
-						</DropdownMenuItem>
-						<Separator />
-					</>
-				)}
+				{isAdmin ? (
+					variant === 'user' ? (
+						<>
+							<DropdownMenuItem
+								className='py-[11px] px-[13px]'
+								onClick={() => router.push('/dashboard')}
+							>
+								Open Dashboard
+							</DropdownMenuItem>
+							<Separator />
+						</>
+					) : (
+						<>
+							<DropdownMenuItem
+								className='py-[11px] px-[13px]'
+								onClick={() => router.push('/articles')}
+							>
+								Open homepage
+							</DropdownMenuItem>
+							<Separator />
+						</>
+					)
+				) : null}
+
 				<DropdownMenuItem
 					className='text-red-600 py-[11px] px-[13px]'
 					onClick={onLogout}
