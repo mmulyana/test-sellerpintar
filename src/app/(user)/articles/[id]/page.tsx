@@ -2,9 +2,9 @@ import { Article } from '@/features/article/types'
 import { apiArticles } from '@/shared/constant/urls'
 import { formatDate } from '@/shared/utils'
 import Image from 'next/image'
-import parse from 'html-react-parser'
 import ArticleRelated from '@/features/article/components/article-related'
 import { SafeHtmlRenderer } from '@/shared/components/common/safe-html-renderer'
+import { Metadata } from 'next'
 
 async function getArticle(id: string) {
 	const res = await fetch(`${apiArticles}/${id}`, {
@@ -16,6 +16,27 @@ async function getArticle(id: string) {
 	}
 
 	return res.json()
+}
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ id: string }>
+}): Promise<Metadata> {
+	const id = (await params).id
+	const article: Article = await getArticle(id)
+
+	const title = article.title || 'Article Detail'
+	const image = article.imageUrl
+
+	return {
+		title,
+		openGraph: {
+			title,
+			images: image ? [image] : [],
+			type: 'article',
+		},
+	}
 }
 
 export default async function DetailPage({
@@ -41,7 +62,7 @@ export default async function DetailPage({
 					src={article.imageUrl}
 					height={480}
 					width={1120}
-					alt='image'
+					alt='Article image'
 					className='rounded-xl mb-10'
 				/>
 			)}
