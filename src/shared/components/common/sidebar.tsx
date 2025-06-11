@@ -79,11 +79,6 @@ export default function Sidebar() {
 								'flex gap-3 px-4 py-2 text-white rounded-md hover:bg-blue-500 text-sm',
 								isActive(item.path) && 'bg-blue-500'
 							)}
-							onClick={() => {
-								if (isMobile) {
-									setOpen(false)
-								}
-							}}
 						>
 							{item.icon}
 							<p>{item.name}</p>
