@@ -1,3 +1,5 @@
+'use client'
+
 import {
 	ColumnDef,
 	flexRender,
@@ -38,7 +40,7 @@ export function DataTable<TData, TValue>({
 	total,
 	title,
 	filter,
-	reset
+	reset,
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable({
 		data,
@@ -82,7 +84,9 @@ export function DataTable<TData, TValue>({
 			<TableRow>
 				<TableCell colSpan={columns.length} className='h-fit py-4'>
 					<div className='flex flex-col justify-center items-center py-10 space-y-4'>
-						<p className='text-lg text-slate-900'>Create new {title || 'data'}</p>
+						<p className='text-lg text-slate-900'>
+							Create new {title || 'data'}
+						</p>
 						{action}
 					</div>
 				</TableCell>

@@ -1,3 +1,5 @@
+'use client'
+
 import AlertConfirm from '@/shared/components/common/alert-confirm'
 import { useDeleteCategory } from '../api/use-delete-category'
 

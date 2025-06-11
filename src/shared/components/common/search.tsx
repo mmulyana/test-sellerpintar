@@ -43,7 +43,7 @@ export default function Search({
 	}, [inputValue, isControlled, onValueChange, setQuery])
 
 	return (
-		<div className='relative h-9 w-fit'>
+		<div className='relative h-9 w-fit bg-white'>
 			<SearchIcon
 				size={20}
 				className='top-1/2 -translate-y-1/2 left-3 absolute text-slate-400'

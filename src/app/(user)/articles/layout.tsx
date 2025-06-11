@@ -1,3 +1,5 @@
+'use client'
+
 import Header from '@/shared/components/common/header'
 
 export default function Layout({ children }: React.PropsWithChildren) {

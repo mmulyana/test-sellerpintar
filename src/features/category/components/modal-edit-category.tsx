@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, buttonVariants } from '@/shared/components/ui/button'
 import {
 	Dialog,
@@ -28,7 +30,7 @@ export default function ModalEditCategory({
 	const form = useForm<CategoryMutate>({
 		resolver: zodResolver(CategorySchema),
 		defaultValues: {
-			name: '',
+			name: name,
 		},
 	})
 

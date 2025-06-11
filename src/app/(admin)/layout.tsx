@@ -1,4 +1,9 @@
-import Sidebar from '@/shared/components/common/sidebar'
+'use client'
+
+import dynamic from 'next/dynamic'
+const Sidebar = dynamic(() => import('@/shared/components/common/sidebar'), {
+	ssr: false,
+})
 
 export default function DashboardLayout({ children }: React.PropsWithChildren) {
 	return (

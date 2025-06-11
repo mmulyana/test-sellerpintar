@@ -1,12 +1,21 @@
+'use client'
+
 import TableArticles from '@/features/article/components/table-article'
-import HeaderV2 from '@/shared/components/common/header-v2'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+const DynamicHeaderV2 = dynamic(
+	() => import('@/shared/components/common/header-v2'),
+	{ ssr: false }
+)
 
 export default function Page() {
 	return (
 		<div>
-			<HeaderV2 title='Articles' />
+			<DynamicHeaderV2 title='Articles' />
 			<div className='p-6'>
-				<TableArticles />
+				<Suspense>
+					<TableArticles />
+				</Suspense>
 			</div>
 		</div>
 	)

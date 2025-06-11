@@ -98,7 +98,7 @@ export default function FormLoginRegister({
 	return (
 		<Card className='px-4 py-10'>
 			<Image
-				src='/assets/logo.png'
+				src='/assets/logo.svg'
 				alt='Logo'
 				width={134}
 				height={24}

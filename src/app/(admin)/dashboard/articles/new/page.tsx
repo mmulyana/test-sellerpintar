@@ -1,7 +1,6 @@
 'use client'
 
 import { ArrowLeft } from 'lucide-react'
-import HeaderV2 from '@/shared/components/common/header-v2'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import FormArticle from '@/features/article/components/form-article'
@@ -12,6 +11,12 @@ import { uploadImage } from '@/shared/api/upload-s3'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArticleSchema } from '@/features/article/schema'
 import { ArticleForm } from '@/features/article/types'
+import dynamic from 'next/dynamic'
+
+const DynamicHeaderV2 = dynamic(
+	() => import('@/shared/components/common/header-v2'),
+	{ ssr: false }
+)
 
 export default function Page() {
 	const router = useRouter()
@@ -48,7 +53,7 @@ export default function Page() {
 	}
 	return (
 		<div>
-			<HeaderV2 title='Articles' />
+			<DynamicHeaderV2 title='Articles' />
 			<div className='p-6'>
 				<div className='bg-gray-50 rounded-xl border'>
 					<div className='p-5'>
